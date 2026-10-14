@@ -3,6 +3,17 @@
   "version": "0.2.0",
   "private": true,
   "description": "DSH 界面微调：背景/面板透明度、毛玻璃模糊、放大态底色、整体缩放。只改样式，不碰数据；自带降级与自检，任何情况下都不会让 DSH 起不来。",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yookio-Z/dsh-plugin-ui-tweak.git"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "theme",
+    "ui"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -19,7 +30,6 @@
     "lib",
     "cordis.patch.yml",
     "README.md",
-    "INSTALL.md",
     "test"
   ],
   "dsh": {
