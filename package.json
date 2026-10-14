@@ -1,0 +1,38 @@
+{
+  "name": "dsh-plugin-ui-tweak",
+  "version": "0.2.0",
+  "private": true,
+  "description": "DSH 界面微调：背景/面板透明度、毛玻璃模糊、放大态底色、整体缩放。只改样式，不碰数据；自带降级与自检，任何情况下都不会让 DSH 起不来。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "test": "node test/client.test.mjs",
+    "pack": "pnpm pack"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "INSTALL-WINDOWS.md",
+    "test"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  }
+}
