@@ -23,15 +23,14 @@ profile 目录：
    C:\Users\<你>\.dsh\profiles\desktop\node_modules\dsh-plugin-ui-tweak\
    ```
 
-2. 打开**上一层**的 `package.json`（`...\.dsh\profiles\desktop\package.json`），照下面补两处：
+2. 打开**上一层**的 `package.json`（`...\.dsh\profiles\desktop\package.json`），在
+   **`dsh.profile.bundles`** 数组里加一行包名 —— **这一行就是"启用"**：
 
    ```json
    {
      "name": "dsh-profile-desktop",
      "private": true,
-     "dependencies": {
-       "dsh-plugin-ui-tweak": "file:./node_modules/dsh-plugin-ui-tweak"
-     },
+     "dependencies": { "...": "（原有内容保持不动）" },
      "dsh": {
        "profile": {
          "bundles": [
@@ -44,11 +43,15 @@ profile 目录：
    }
    ```
 
-   - `dependencies` 里那一行只是"账本"；
-   - **`dsh.profile.bundles` 里那一行才是"启用"** —— 两处都写，缺一不可。
-   - 原有的其它内容（别的依赖、别的 bundles、别的字段）**保持不动**。
+   原有的其它内容（别的依赖、别的 bundles、别的字段）**保持不动**，只多一行。
+   `dependencies` 那一行**不用写**：DSH 是按 `bundles` + `node_modules` 里的实际目录来加载的，
+   写一个指向 `node_modules` 自己的 `file:` 依赖反而会让 pnpm 之后犯迷糊。
 
 3. 完全退出 DSH（Windows 记得把托盘里的图标也退掉），重新打开。
+
+> **注意**：方法 1 是"绕过包管理器"的装法。以后如果你又执行了 `dsh plugin add/remove`
+> 之类的操作，pnpm 可能把手工放进 `node_modules` 的这个目录当"多余的包"清掉 ——
+> 重新解压放一次即可；想长期用就走方法 2。
 
 ## 方法 2：一条命令（任何装了 DSH 的机器）
 
@@ -86,7 +89,7 @@ DSH 桌面版 **设置 → 插件 → 安装**，把方法 2 里的 spec（`gith
 ## 卸载
 
 1. 删掉 profile 的 `node_modules/dsh-plugin-ui-tweak`；
-2. 把 `package.json` 里加过的那两行（`dependencies` 与 `dsh.profile.bundles`）去掉；
+2. 把 `package.json` 里 `dsh.profile.bundles` 中加过的那一行去掉；
 3. 完全退出 DSH 再打开。
 
 用方法 2 装的可以直接：`dsh plugin --profile desktop remove dsh-plugin-ui-tweak`。
