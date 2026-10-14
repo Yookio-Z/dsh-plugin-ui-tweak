@@ -19,7 +19,7 @@
     "lib",
     "cordis.patch.yml",
     "README.md",
-    "INSTALL-WINDOWS.md",
+    "INSTALL.md",
     "test"
   ],
   "dsh": {

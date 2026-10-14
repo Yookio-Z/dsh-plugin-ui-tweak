@@ -29,7 +29,10 @@
 
 改动**即时生效并自动保存**，刷新或重启都还在（存在浏览器 localStorage，和 DSH 自己的客户端本地设置同一个存法）。
 
-## 装 / 卸 / 重新启用
+## 装 / 卸
+
+**完整的安装步骤看 [INSTALL.md](./INSTALL.md)**（macOS / Windows 三种装法，含解压即装、一条命令、
+应用内安装，以及卸载和验证）。这里只留要点：
 
 ```sh
 DSH="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
@@ -41,9 +44,11 @@ DSH="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
 "$DSH" plugin --profile desktop remove dsh-plugin-ui-tweak
 ```
 
+装完**完全退出 DSH 再打开**（宿主侧要重读 profile）。
+
 `dsh plugin add` 会做两件事，**缺一不可**：
 
-1. 把包写进 `~/.dsh/profiles/desktop/package.json` 的 `dependencies`（link: 装 = 软链）；
+1. 把包写进 `<profile>/package.json` 的 `dependencies`（link: 装 = 软链）；
 2. 把包名写进同一个文件的 **`dsh.profile.bundles`** —— 这一条才是「启用」。
    插件自己的 `cordis.patch.yml`（`insert` 一个宿主行）只有在包被激活后才会被应用。
 
